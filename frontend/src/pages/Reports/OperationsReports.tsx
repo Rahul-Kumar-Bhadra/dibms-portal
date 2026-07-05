@@ -55,8 +55,8 @@ interface ValidationIssue {
 interface ValidationReport {
   status: string;
   file_name: string;
-  total_errors: int;
-  total_warnings: int;
+  total_errors: number;
+  total_warnings: number;
   errors: ValidationIssue[];
   warnings: ValidationIssue[];
   parsed_data?: any;
