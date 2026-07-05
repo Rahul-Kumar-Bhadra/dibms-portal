@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
+import { safeDate } from '../../utils/date';
 import {
   ShieldAlert,
   Search,
@@ -153,7 +154,7 @@ const AuditLogs: React.FC = () => {
                         <div className="flex items-center space-x-1.5">
                           <Clock className="w-3.5 h-3.5 text-slate-400" />
                           <span>
-                            {new Date(log.created_at).toLocaleString([], {
+                            {safeDate(log.created_at).toLocaleString([], {
                               dateStyle: 'medium',
                               timeStyle: 'medium'
                             })}

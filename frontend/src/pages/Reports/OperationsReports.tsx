@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../services/api';
+import { safeDate } from '../../utils/date';
 import {
   FileText,
   Plus,
@@ -232,7 +233,7 @@ const OperationsReports: React.FC = () => {
       r.plant_id, r.plant_name, `${MONTH_NAMES[r.month]} ${r.year}`,
       r.revenue, r.expenses, r.production_units, r.attendance_rate,
       r.safety_incidents, r.quality_score, r.status, r.submitted_by_name,
-      new Date(r.submitted_at).toLocaleString()
+      safeDate(r.submitted_at).toLocaleString()
     ]);
     
     const csvContent = 'data:text/csv;charset=utf-8,' +
@@ -605,7 +606,7 @@ const OperationsReports: React.FC = () => {
                         <span className="text-[11px] text-slate-600">{h.uploaded_by_name}</span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="text-[11px] text-slate-500">{new Date(h.uploaded_at).toLocaleString()}</span>
+                        <span className="text-[11px] text-slate-500">{safeDate(h.uploaded_at).toLocaleString()}</span>
                       </td>
                     </tr>
                   ))

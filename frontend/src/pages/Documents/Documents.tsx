@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../services/api';
+import { safeDate } from '../../utils/date';
 import {
   FolderOpen,
   Search,
@@ -338,7 +339,7 @@ const Documents: React.FC = () => {
                   <div>
                     <span>Size: {formatBytes(doc.file_size)}</span>
                     <span className="mx-2">•</span>
-                    <span>Uploaded {new Date(doc.uploaded_at).toLocaleDateString()}</span>
+                    <span>Uploaded {safeDate(doc.uploaded_at).toLocaleDateString()}</span>
                   </div>
                   <button
                     onClick={() => handleDownload(doc.id, doc.file_name)}

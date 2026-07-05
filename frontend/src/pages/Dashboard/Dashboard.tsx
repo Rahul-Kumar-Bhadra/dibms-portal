@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../services/api';
 import StatCard from '../../components/cards/StatCard';
+import { safeDate } from '../../utils/date';
 import {
   Building2,
   Users,
@@ -264,7 +265,7 @@ const Dashboard: React.FC = () => {
                       </div>
                       <div className="text-right text-[10px] text-slate-400 font-medium">
                         {act.user && <span className="block text-slate-500 font-semibold mb-0.5">{act.user}</span>}
-                        {new Date(act.time || act.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        {safeDate(act.time || act.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </div>
                     </div>
                   </li>

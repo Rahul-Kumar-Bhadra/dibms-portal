@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../services/api';
+import { safeDate } from '../../utils/date';
 import {
   Bell,
   CheckCheck,
@@ -183,7 +184,7 @@ const Notifications: React.FC = () => {
                     {n.title}
                   </h4>
                   <span className="text-[9px] text-slate-400 font-medium">
-                    {new Date(n.created_at).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
+                    {safeDate(n.created_at).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 mt-1">{n.message}</p>

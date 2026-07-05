@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../services/api';
+import { safeDate } from '../../utils/date';
 import {
   Users,
   Search,
@@ -291,7 +292,7 @@ const Workforce: React.FC = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-xs text-slate-500">
-                        {new Date(emp.joining_date).toLocaleDateString([], {
+                        {safeDate(emp.joining_date).toLocaleDateString([], {
                           dateStyle: 'medium'
                         })}
                       </td>
