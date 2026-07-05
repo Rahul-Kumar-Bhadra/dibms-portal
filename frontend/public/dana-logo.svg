@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
+  <!-- Blue top diamond segment -->
+  <path d="M 300 20 L 570 150 L 30 150 Z" fill="#0086d6" />
+  <!-- Black bottom diamond segment -->
+  <path d="M 300 280 L 570 150 L 30 150 Z" fill="#1b1818" />
+  <!-- White center diamond -->
+  <path d="M 300 65 L 480 150 L 300 235 L 120 150 Z" fill="#ffffff" />
+  <!-- Text DANA in the center -->
+  <text x="300" y="176" font-family="'Inter', 'Arial Black', sans-serif" font-size="82" font-weight="900" text-anchor="middle" fill="#1b1818" letter-spacing="-3">DANA</text>
+</svg>

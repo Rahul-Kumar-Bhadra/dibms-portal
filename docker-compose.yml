@@ -1,0 +1,24 @@
+# DIBMS — Docker Compose
+# Usage: docker compose up --build
+
+services:
+  dibms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dibms-app
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=docker-local-dev-secret-key-change-in-prod
+      - DATABASE_URL=sqlite:///./dibms.db
+      - BACKEND_CORS_ORIGINS=http://localhost:8000,http://localhost:3000
+      - UPLOAD_DIR=uploads
+    volumes:
+      - dibms-uploads:/app/backend/uploads
+      - dibms-db:/app/backend
+    restart: unless-stopped
+
+volumes:
+  dibms-uploads:
+  dibms-db:

@@ -1,0 +1,59 @@
+# ========================================
+# DIBMS Project Root .gitignore
+# ========================================
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# ---------- Database ----------
+*.db
+*.sqlite3
+
+# ---------- Uploads ----------
+uploads/
+
+# ---------- Environment ----------
+.env
+.env.local
+.env.production
+
+# ---------- Node / Frontend ----------
+node_modules/
+frontend/dist/
+frontend/dist-ssr/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------- IDE ----------
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# ---------- Docker ----------
+docker-compose.override.yml
+
+# ---------- OS ----------
+*.log
