@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+console.log("Vercel production build triggered.");
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
