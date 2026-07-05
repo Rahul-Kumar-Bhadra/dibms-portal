@@ -515,3 +515,32 @@ def get_upload_history(
                 h.uploaded_by_name = f"{sub_user.first_name or ''} {sub_user.last_name or ''}".strip() or sub_user.email
     
     return histories
+
+@router.delete("/plant/{plant_id}", status_code=status.HTTP_200_OK, dependencies=[Depends(deps.RoleChecker(["Enterprise Admin"]))])
+def delete_plant_reports(
+    plant_id: str,
+    db: Session = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user)
+) -> Any:
+    """
+    Delete all operations reports and upload history for a specific plant.
+    Only accessible by Enterprise Admin.
+    """
+    plant = db.query(Plant).filter(Plant.id == plant_id).first()
+    if not plant:
+        raise HTTPException(status_code=404, detail="Plant not found")
+        
+    deleted_reports = db.query(OperationsReport).filter(OperationsReport.plant_id == plant_id).delete()
+    deleted_uploads = db.query(UploadHistory).filter(UploadHistory.plant_id == plant_id).delete()
+    
+    # Audit log
+    db.add(AuditLog(
+        user_id=current_user.id,
+        action="Delete Plant Reports",
+        details=f"Deleted all operations reports ({deleted_reports}) and uploads ({deleted_uploads}) for plant {plant_id}."
+    ))
+    db.commit()
+    
+    return {
+        "message": f"Successfully deleted {deleted_reports} reports and {deleted_uploads} upload records for plant {plant_id} ({plant.name})."
+    }
