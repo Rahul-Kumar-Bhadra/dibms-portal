@@ -544,3 +544,28 @@ def delete_plant_reports(
     return {
         "message": f"Successfully deleted {deleted_reports} reports and {deleted_uploads} upload records for plant {plant_id} ({plant.name})."
     }
+
+@router.delete("/", status_code=status.HTTP_200_OK, dependencies=[Depends(deps.RoleChecker(["Enterprise Admin"]))])
+def delete_all_reports(
+    db: Session = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user)
+) -> Any:
+    """
+    Delete all operations reports and upload history across all plants.
+    Only accessible by Enterprise Admin.
+    """
+    deleted_reports = db.query(OperationsReport).delete()
+    deleted_uploads = db.query(UploadHistory).delete()
+    
+    # Audit log
+    db.add(AuditLog(
+        user_id=current_user.id,
+        action="Delete All Reports",
+        details=f"Deleted all operations reports ({deleted_reports}) and uploads ({deleted_uploads}) across all plants."
+    ))
+    db.commit()
+    
+    return {
+        "message": f"Successfully deleted {deleted_reports} reports and {deleted_uploads} upload records across all plants."
+    }
+
